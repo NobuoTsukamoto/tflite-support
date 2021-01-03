@@ -106,13 +106,13 @@ build:dbg --copt -DDEBUG_BUILD
 build --define=use_fast_cpp_protos=true
 build --define=allow_oversize_protos=true
 
-build --spawn_strategy=standalone
+# build --spawn_strategy=standalone
 build -c opt
 
 # Adding "--cxxopt=-D_GLIBCXX_USE_CXX11_ABI=0" creates parity with TF
 # compilation options. It also addresses memory use due to
 # copy-on-write semantics of std::strings of the older ABI.
-build --cxxopt=-D_GLIBCXX_USE_CXX11_ABI=0
+# build --cxxopt=-D_GLIBCXX_USE_CXX11_ABI=0
 
 # Make Bazel print out all options from rc files.
 build --announce_rc

@@ -1,3 +1,44 @@
+# Changes in this repository
+- [Add Raspberry Pi examples for C++ Vision Task APIs](tensorflow_lite_support\examples\task\vision\pi)
+    - Image classification by OpenCV camera capture (W.I.P).
+    - Object detection by OpenCV camera capture.
+    - Image segmentation by OpenCV camera capture (W.I.P).
+- Change [.bazelrc](.bazelrc).<br>
+    ```
+    $ git diff .bazelrc
+    diff --git a/.bazelrc b/.bazelrc
+    index bdc2c07..cb807fa 100644
+    --- a/.bazelrc
+    +++ b/.bazelrc
+    @@ -106,13 +106,13 @@ build:dbg --copt -DDEBUG_BUILD
+    build --define=use_fast_cpp_protos=true
+    build --define=allow_oversize_protos=true
+
+    -build --spawn_strategy=standalone
+    +# build --spawn_strategy=standalone
+    build -c opt
+
+    # Adding "--cxxopt=-D_GLIBCXX_USE_CXX11_ABI=0" creates parity with TF
+    # compilation options. It also addresses memory use due to
+    # copy-on-write semantics of std::strings of the older ABI.
+    -build --cxxopt=-D_GLIBCXX_USE_CXX11_ABI=0
+    +# build --cxxopt=-D_GLIBCXX_USE_CXX11_ABI=0
+
+    # Make Bazel print out all options from rc files.
+    build --announce_rc
+
+    ```
+    - If enable **--cxxopt = -D_GLIBCXX_USE_CXX11_ABI = 0**, opencv functions will result in undefined reference errors.
+    - If enable **build --spawn_strategy=standalone**, the following build error occurs.<br>It seems that the path of opencv added to WORKSPACE has an effect ([See details](https://github.com/bazelbuild/bazel/issues/8444)).
+        ```
+        /usr/include/c++/8/cstdlib:75:15: fatal error: stdlib.h: No such file or directory
+        #include_next <stdlib.h>
+        ```
+- Add settings related to opencv build<br>
+[WORKSPACE](WORKSPACE).<br>
+[third_party\opencv_aarch64.BUILD](third_party\opencv_aarch64.BUILD)<br>
+[third_party\opencv_linux.BUILD](third_party\opencv_linux.BUILD)
+
 # TensorFlow Lite Support
 
 TFLite Support is a toolkit that helps users to develop ML and deploy TFLite

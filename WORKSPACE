@@ -382,3 +382,9 @@ maven_install(
     fetch_sources = True,
     version_conflict_policy = "pinned",
 )
+
+new_local_repository(
+    name = "linux_aarch64_opencv",
+    build_file = "@//third_party:opencv_aarch64.BUILD",
+    path = "/usr",
+)
