@@ -2,7 +2,7 @@
 - [Add Raspberry Pi examples for C++ Vision Task APIs](tensorflow_lite_support\examples\task\vision\pi)
     - Image classification by OpenCV camera capture (W.I.P).
     - Object detection by OpenCV camera capture.
-    - Image segmentation by OpenCV camera capture (W.I.P).
+    - Image segmentation by OpenCV camera capture.
 - Change [.bazelrc](.bazelrc).<br>
     ```
     $ git diff .bazelrc

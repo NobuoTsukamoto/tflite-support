@@ -24,17 +24,16 @@ sudo apt install openjdk-11-jdk
 Comming soon.
 
 ## Object Detector
+![detection](g3doc/detection.png)
 
-#### Prerequisites
+### Prerequisites
 
 You will need:
 
 * a TFLite object detection model (e.g. [ssd_mobilenet_v1][2], a generic object
 detection model available on TensorFlow Hub),
 
-![detection](g3doc/detection.png)
-
-#### Usage
+### Usage
 
 In the console, run:
 
@@ -45,7 +44,7 @@ $ bazel build \
   tensorflow_lite_support/examples/task/vision/pi/object_detector_capture
 
 # Download the model:
-curl \
+$ curl \
  -L 'https://tfhub.dev/tensorflow/lite-model/ssd_mobilenet_v1/1/metadata/2?lite-format=tflite' \
  -o ./ssd_mobilenet_v1_1_metadata_2.tflite
 
@@ -59,7 +58,7 @@ curl \
 
 Exit with ese or q key.<br>
 
-#### Full command-line options.
+### Full command-line options.
 ```bash
 $ ./bazel-bin/tensorflow_lite_support/examples/task/vision/pi/object_detector_capture --help
 object_detector_capture: Warning: SetProgramUsageMessage() never called
@@ -88,10 +87,54 @@ object_detector_capture: Warning: SetProgramUsageMessage() never called
 Try --helpfull to get a list of all flags.
 ```
 
-
-
 ## Image Segmenter
-Comming soon.
+![segmentation](g3doc/segmentation.png)
+
+### Prerequisites
+
+You will need:
+
+* a TFLite image segmentation model (e.g. [deeplab_v3][3], a generic segmentation model available on TensorFlow Hub).
+
+### Usage
+
+In the console, run:
+
+```bash
+# Build module (top directory):
+$ bazel build \
+  --verbose_failures \
+  tensorflow_lite_support/examples/task/vision/pi/image_segmenter_capture
+
+# Download the model:
+$ curl  \
+  -L 'https://tfhub.dev/tensorflow/lite-model/deeplabv3/1/metadata/1?lite-format=tflite'  \
+  -o ./deeplabv3_1_metadata_1.tflite
+
+# Run the detection tool:
+./bazel-bin/tensorflow_lite_support/examples/task/vision/pi/image_segmenter_capture \
+  --model_path=./deeplabv3_1_metadata_1.tflite \
+  --num_thread=4
+```
+
+- Exit with ese or q key.
+- Space key: Switching the display image(segmentation map or segmentation image).
+
+### Full command-line options.
+```bash
+$ $ ./bazel-bin/tensorflow_lite_support/examples/task/vision/pi/image_segmenter_capture --help
+image_segmenter_capture: Warning: SetProgramUsageMessage() never called
+
+  Flags from tensorflow_lite_support/examples/task/vision/pi/image_segmenter_capture.cc:
+    --model_path (Absolute path to the '.tflite' image segmenter model.);
+      default: "";
+    --num_thread (The number of threads to be used for TFLite ops that support
+      multi-threading when running inference with CPU.num_threads should be
+      greater than 0 or equal to -1. Setting num_threads to -1 has the effect to
+      let TFLite runtime set the value.); default: -1;
+
+Try --helpfull to get a list of all flags.
+```
 
 [1]: https://tfhub.dev/google/lite-model/aiy/vision/classifier/birds_V1/3
 [2]: https://tfhub.dev/tensorflow/lite-model/ssd_mobilenet_v1/1/metadata/2

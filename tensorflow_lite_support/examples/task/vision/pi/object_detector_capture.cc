@@ -77,7 +77,7 @@ namespace {
 constexpr int kLineThickness = 2;
 
 // Window name. 
-const cv::String kWindowName = "Object detection example.";
+const cv::String kWindowName = "TensorFlow Lite Support Object detection example.";
 
 // The color   used for drawing the detection results.
 const cv::Scalar kBuleColor = cv::Scalar(255, 209, 0);
@@ -112,7 +112,7 @@ void DrawCaption(cv::Mat& im,
 }
 
 absl::Status EncodeResultToMat(const DetectionResult& result,
-                                      cv::Mat& image) {
+                               cv::Mat& image) {
   for (int index = 0; index < result.detections_size(); ++index) {
     // Get bounding box as left, top, right, bottom.
     const BoundingBox& box = result.detections(index).bounding_box();
@@ -153,7 +153,7 @@ absl::Status Detect() {
   ASSIGN_OR_RETURN(std::unique_ptr<ObjectDetector> object_detector,
                    ObjectDetector::CreateFromOptions(options));
 
-  // OpenCV window setting
+  // OpenCV window setting.
   cv::namedWindow(kWindowName,
       cv::WINDOW_GUI_NORMAL | cv::WINDOW_AUTOSIZE | cv::WINDOW_KEEPRATIO);
   cv::moveWindow(kWindowName, 100, 100);
@@ -190,8 +190,7 @@ absl::Status Detect() {
     // Show image and handle the keyboard before moving to the next frame
     cv::imshow(kWindowName, frame);
     const int key = cv::waitKey(1);
-    if (key == 27 || key == 'q')  // Esc or q key
-    {
+    if (key == 27 || key == 'q') {  // Esc or q key
       break;  // Escape
     }
   }
