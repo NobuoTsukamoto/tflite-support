@@ -6,8 +6,8 @@ package(
 )
 
 cc_binary(
-    name = "image_classifier_demo",
-    srcs = ["image_classifier_demo.cc"],
+    name = "image_classifier_capture",
+    srcs = ["image_classifier_capture.cc"],
     deps = [
         "//tensorflow_lite_support/cc/port:statusor",
         "//tensorflow_lite_support/cc/task/core:external_file_handler",
@@ -18,6 +18,7 @@ cc_binary(
         "//tensorflow_lite_support/cc/task/vision/proto:image_classifier_options_proto_inc",
         "//tensorflow_lite_support/cc/task/vision/utils:frame_buffer_common_utils",
         "//tensorflow_lite_support/examples/task/vision/desktop/utils:image_utils",
+        "@linux_aarch64_opencv//:opencv",
         "@com_google_absl//absl/flags:flag",
         "@com_google_absl//absl/flags:parse",
         "@com_google_absl//absl/status",

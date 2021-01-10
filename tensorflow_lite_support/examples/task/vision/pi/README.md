@@ -21,7 +21,64 @@ sudo apt install openjdk-11-jdk
 
 ## Image Classifier
 
-Comming soon.
+### Prerequisites
+
+You will need:
+
+* a TFLite image classification model (e.g. [aiy/vision/classifier/birds_V1][1], a bird classification model available on TensorFlow Hub).
+
+### Usage
+
+In the console, run:
+
+```bash
+# Build module (top directory):
+$ bazel build \
+  --verbose_failures \
+  tensorflow_lite_support/examples/task/vision/pi/image_classifier_capture
+
+# Download the model:
+$ curl \
+ -L 'https://tfhub.dev/google/lite-model/aiy/vision/classifier/birds_V1/3?lite-format=tflite' \
+ -o ./aiy_vision_classifier_birds_V1_3.tflite
+
+# Run the detection tool:
+./bazel-bin/tensorflow_lite_support/examples/task/vision/pi/image_classifier_capture \
+  --model_path=./aiy_vision_classifier_birds_V1_3.tflite \
+  --num_thread=4
+```
+
+
+Exit with ese or q key.<br>
+
+### Full command-line options.
+```bash
+$ ./bazel-bin/tensorflow_lite_support/examples/task/vision/pi/object_detector_capture --help
+object_detector_capture: Warning: SetProgramUsageMessage() never called
+
+  Flags from tensorflow_lite_support/examples/task/vision/pi/object_detector_capture.cc:
+    --class_name_blacklist (Comma-separated list of class names that acts as a
+      blacklist. If non-empty, detections results whose 'class_name' is in this
+      list are filtered out. Mutually exclusive with 'class_name_whitelist'.);
+      default: ;
+    --class_name_whitelist (Comma-separated list of class names that acts as a
+      whitelist. If non-empty, detections results whose 'class_name' is not in
+      this list are filtered out. Mutually exclusive with
+      'class_name_blacklist'.); default: ;
+    --max_results (Maximum number of detection results to display.); default: 5;
+    --model_path (Absolute path to the '.tflite' object detector model.);
+      default: "";
+    --num_thread (The number of threads to be used for TFLite ops that support
+      multi-threading when running inference with CPU.num_threads should be
+      greater than 0 or equal to -1. Setting num_threads to -1 has the effect to
+      let TFLite runtime set the value.); default: -1;
+    --score_threshold (Detection results with a confidence score below this
+      value are rejected. If specified, overrides the score threshold(s)
+      provided in the TFLite Model Metadata. Ignored otherwise.);
+      default: -3.40282347e+38;
+
+Try --helpfull to get a list of all flags.
+```
 
 ## Object Detector
 ![detection](g3doc/detection.png)
