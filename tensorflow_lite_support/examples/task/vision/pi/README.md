@@ -14,9 +14,9 @@ $ sudo apt install git libopencv-dev
 
 # Install build tool. Only native build. Cross-compile (W.I.P)
 $ wget https://github.com/bazelbuild/bazel/releases/download/3.7.2/bazel-3.7.2-linux-arm64
-chmod +x bazel-3.7.2-linux-arm64
-sudo mv bazel-3.7.2-linux-arm64 /usr/local/bin/bazel
-sudo apt install openjdk-11-jdk
+$ chmod +x bazel-3.7.2-linux-arm64
+$ sudo mv bazel-3.7.2-linux-arm64 /usr/local/bin/bazel
+$ sudo apt install openjdk-11-jdk
 ```
 
 ## Image Classifier
@@ -42,8 +42,8 @@ $ curl \
  -L 'https://tfhub.dev/google/lite-model/aiy/vision/classifier/birds_V1/3?lite-format=tflite' \
  -o ./aiy_vision_classifier_birds_V1_3.tflite
 
-# Run the detection tool:
-./bazel-bin/tensorflow_lite_support/examples/task/vision/pi/image_classifier_capture \
+# Run the classification tool:
+$ ./bazel-bin/tensorflow_lite_support/examples/task/vision/pi/image_classifier_capture \
   --model_path=./aiy_vision_classifier_birds_V1_3.tflite \
   --num_thread=4
 ```
@@ -106,7 +106,7 @@ $ curl \
  -o ./ssd_mobilenet_v1_1_metadata_2.tflite
 
 # Run the detection tool:
-./bazel-bin/tensorflow_lite_support/examples/task/vision/pi/object_detector_capture \
+$ ./bazel-bin/tensorflow_lite_support/examples/task/vision/pi/object_detector_capture \
   --model_path=./ssd_mobilenet_v1_1_metadata_2.tflite \
   --score_threshold=0.5 \
   --num_thread=4
@@ -164,12 +164,12 @@ $ bazel build \
   tensorflow_lite_support/examples/task/vision/pi/image_segmenter_capture
 
 # Download the model:
-$ curl  \
+$ curl \
   -L 'https://tfhub.dev/tensorflow/lite-model/deeplabv3/1/metadata/1?lite-format=tflite'  \
   -o ./deeplabv3_1_metadata_1.tflite
 
-# Run the detection tool:
-./bazel-bin/tensorflow_lite_support/examples/task/vision/pi/image_segmenter_capture \
+# Run the segmantation tool:
+$ ./bazel-bin/tensorflow_lite_support/examples/task/vision/pi/image_segmenter_capture \
   --model_path=./deeplabv3_1_metadata_1.tflite \
   --num_thread=4
 ```

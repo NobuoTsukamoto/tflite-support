@@ -15,10 +15,9 @@ limitations under the License.
 
 // Example usage:
 // bazel run -c opt \
-//  tensorflow_lite_support/examples/task/vision/desktop:image_classifier_demo \
+//  tensorflow_lite_support/examples/task/vision/desktop:image_classifier_capture \
 //  -- \
-//  --model_path=/path/to/model.tflite \
-//  --image_path=/path/to/image.jpg
+//  --model_path=/path/to/model.tflite
 
 #include <iostream>
 #include <chrono>
